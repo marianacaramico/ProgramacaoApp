@@ -1,3 +1,6 @@
 sp - letras
 dp - imagens
 in, mm, pt, px - fixas (independente do tamanho da tela do cara, fica do mesmo tamanho)
+
+ícone:
+Project > app > src > res > pastas mipmap
