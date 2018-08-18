@@ -1,0 +1,20 @@
+Para o método saber qual botão chamou ele:
+
+exemplo:
+
+public void calcular(View botao) {
+  double n1 = Double.valueOf(editn1.getText().toString());
+  double n2.....
+  
+  double resultado = 0;
+  switch(botao.getId()){
+    case R.id.botaoSomar: resultado = n1+n2;
+      break
+    case R.id.botaoSubtrair: resultado = n1-n2
+      break;
+  }
+  
+  .........
+  
+}
+
