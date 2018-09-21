@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/meta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Meta do porquinho"/>
+
+    <Switch
+        android:id="@+id/habilitar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Depósito"
+        android:onClick="habilitarDesabilitar"
+        app:layout_constraintTop_toBottomOf="@id/meta"/>
+
+    <EditText
+        android:id="@+id/valor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Valor do depósito"
+        app:layout_constraintTop_toBottomOf="@id/habilitar"/>
+
+    <Button
+        android:id="@+id/depositar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Depositar"
+        android:enabled="false"
+        android:onClick="depositar"
+        app:layout_constraintTop_toBottomOf="@id/habilitar"
+        app:layout_constraintLeft_toRightOf="@id/valor"/>
+
+    <ProgressBar
+        android:id="@+id/progresso"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:progressBackgroundTint="#e3e3e3"
+        android:progressTint="#ff6b99"
+        android:progress="0"
+        android:max="1000"
+        app:layout_constraintTop_toBottomOf="@id/valor"/>
+
+</android.support.constraint.ConstraintLayout>
+
+-----------------------------------------------------------------------------
+
+package caramico.camarico.mariana.porkinholindo;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Switch;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText editTextMeta;
+    private EditText editTextValor;
+    private Button buttonDepositar;
+    private ProgressBar progressBarProgresso;
+    private int valor;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editTextMeta = findViewById(R.id.meta);
+        editTextValor = findViewById(R.id.valor);
+        buttonDepositar = findViewById(R.id.depositar);
+        progressBarProgresso = findViewById(R.id.progresso);
+    }
+
+    public void habilitarDesabilitar(View view) {
+        Switch sview = (Switch)view;
+        buttonDepositar.setEnabled(sview.isChecked());
+    }
+
+    public void depositar(View view) {
+        int meta = Integer.parseInt(editTextMeta.getText().toString());
+        valor += Integer.parseInt(editTextValor.getText().toString());
+        int progresso;
+        if(meta<=0){
+            progresso=1000;
+        } else {
+            progresso = (valor / meta) * 100;
+            if (progresso > meta) {
+                progresso = 1000;
+            }
+        }
+        progressBarProgresso.setProgress(progresso);
+    }
+
+}
