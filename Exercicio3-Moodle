@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/bandeira"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:src="@drawable/bandeira"/>
+
+    <Button
+        android:id="@+id/fruta1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fruta1"
+        android:textColor="@color/cor"
+        app:layout_constraintTop_toBottomOf="@id/bandeira"/>
+
+    <Button
+        android:id="@+id/fruta2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fruta2"
+        android:textColor="@color/cor"
+        app:layout_constraintTop_toBottomOf="@id/bandeira"
+        app:layout_constraintLeft_toRightOf="@id/fruta1"/>
+
+    <Button
+        android:id="@+id/fruta3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fruta3"
+        android:textColor="@color/cor"
+        app:layout_constraintTop_toBottomOf="@id/bandeira"
+        app:layout_constraintLeft_toRightOf="@id/fruta2"/>
+
+</android.support.constraint.ConstraintLayout>
+
+----------------------------------------------------------------
+
+<resources>
+    <string name="app_name">FrutasPoliglotas</string>
+    <drawable name="bandeira">@mipmap/brbrbrhuehuehue</drawable>
+    <string name="fruta1">Abacaxi</string>
+    <string name="fruta2">Melão</string>
+    <string name="fruta3">Maçã</string>
+    <color name="cor">#0c0</color>
+</resources>
+
+----------------------------------------------------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PoligloteFruit</string>
+    <drawable name="bandeira">@mipmap/usa</drawable>
+    <string name="fruta1">Pineapple</string>
+    <string name="fruta2">Melon</string>
+    <string name="fruta3">Apple</string>
+    <color name="cor">#c00</color>
+</resources>
+
+----------------------------------------------------------------
