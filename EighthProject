@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/texto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textColor="@color/cor_fonte"
+        android:text="@string/bom_dia" />
+
+    <Button
+        android:id="@+id/botao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="descrever"
+        android:text="@string/boa_noite"
+        app:layout_constraintTop_toBottomOf="@id/texto"/>
+
+    <EditText
+        android:id="@+id/nome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Seu nome"
+        app:layout_constraintTop_toBottomOf="@id/botao"/>
+
+    <EditText
+        android:id="@+id/idade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Sua idade"
+        app:layout_constraintTop_toBottomOf="@id/nome"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_foto"
+        app:layout_constraintTop_toBottomOf="@id/idade"/>
+
+</android.support.constraint.ConstraintLayout>
+
+----------------------------------------------------------------
+
+<resources>
+    <string name="app_name">Caramico</string>
+    <string name="bom_dia">Bom dia</string>
+    <string name="boa_noite">Boa noite, galera, vo cantá um fristaili pra voceis</string>
+    <string name="descricao">Olá, %1$s. Você tem %2$d anos.</string>
+    <color name="cor_fonte">#ff6b99</color>
+
+    <drawable name="img_foto">
+        @mipmap/raccoon
+    </drawable>
+
+</resources>
+
+-----------------------------------------------------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Caramico</string>
+    <string name="bom_dia">Good day. I said good day</string>
+    <string name="boa_noite">So long farewell</string>
+    <string name="descricao">HELLO, %1$s. U R %2$d YRS OLD</string>
+    <color name="cor_fonte">#0c0</color>
+
+
+    <drawable name="img_foto">
+        @mipmap/kitten
+    </drawable>
+</resources>
+
+------------------------------------------------------------------
+
+package caramico.camarico.mariana.poliglota;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        String frase1 = getString(R.string.boa_noite);
+        Toast.makeText(this, frase1, Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void descrever(View v){
+        EditText editNome = findViewById(R.id.nome);
+        String nome = editNome.getText().toString();
+        EditText editIdade = findViewById(R.id.idade);
+        int idade = Integer.valueOf(editIdade.getText().toString());
+        //pega um valor de strings.xml como parâmetros
+        String descricao = getString(R.string.descricao, nome, idade);
+
+        Toast.makeText(this, descricao, Toast.LENGTH_SHORT).show();
+    }
+
+
+}
