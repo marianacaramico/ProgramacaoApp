@@ -1,0 +1,36 @@
+package caramico.camarico.mariana.dadosoffline;
+
+import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    private SharedPreferences preferencias;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        this.preferencias = getSharedPreferences("bandtec", MODE_PRIVATE);
+
+        String agencia = this.preferencias.getString("agencia", "-");
+        String conta = this.preferencias.getString("conta", "-");
+
+        Toast.makeText(this, "Agência: "+agencia+" | Conta: "+conta, Toast.LENGTH_SHORT).show();
+    }
+
+    public void salvarDados(View v){
+        String agencia = "123";
+        String conta = "111";
+        SharedPreferences.Editor edit = this.preferencias.edit();
+        edit.putString("agencia", agencia);
+        edit.putString("conta", conta);
+        edit.apply();
+    }
+
+
+}
