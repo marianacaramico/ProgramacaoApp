@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/nome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Nome do Jedi"/>
+
+    <EditText
+        android:id="@+id/idade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Idade do Jedi"
+        app:layout_constraintTop_toBottomOf="@id/nome"/>
+
+    <Switch
+        android:id="@+id/ladonegro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lado negro da força"
+        app:layout_constraintTop_toBottomOf="@id/idade"/>
+
+    <Button
+        android:id="@+id/descobrir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descobrir Jedi"
+        android:onClick="Descobrir"
+        app:layout_constraintTop_toBottomOf="@id/ladonegro"/>
+
+
+</android.support.constraint.ConstraintLayout>
+
+
+
+-------------------------------------------------------------------------------
+
+package br.com.bandtec.guerranasestrelasmariana;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Switch;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText idadeTxt;
+    private Switch ladoNegroTxt;
+    private Button btnTxt;
+    private boolean jediNegro = false;
+    private int img = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        idadeTxt = findViewById(R.id.idade);
+        ladoNegroTxt = findViewById(R.id.ladonegro);
+        btnTxt = findViewById(R.id.descobrir);
+    }
+
+
+
+    public void Descobrir(View view){
+        int idadeVal = Integer.parseInt(idadeTxt.getText().toString());
+        if(ladoNegroTxt.isChecked()){
+            if(idadeVal < 25){
+                img = 1;
+            } else {
+                img = 2;
+            }
+        } else {
+            if(idadeVal < 40){
+                img = 3;
+            } else {
+                img = 4;
+            }
+        }
+        Intent novaTela = new Intent(this, Main2Activity.class);
+        novaTela.putExtra("img", img);
+        startActivity(novaTela);
+    }
+}
+
+--------------------------------------------------------------------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main2Activity">
+
+    <ImageView
+        android:id="@+id/imagem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Que a força esteja com você!"
+        app:layout_constraintTop_toBottomOf="@id/imagem"/>
+
+</android.support.constraint.ConstraintLayout>
+
+---------------------------------------------------------------------------------
+
+package br.com.bandtec.guerranasestrelasmariana;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.ImageView;
+
+public class Main2Activity extends AppCompatActivity {
+
+    private ImageView imagemTxt;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main2);
+
+        imagemTxt = findViewById(R.id.imagem);
+        int setImagem = getIntent().getIntExtra("img", 0);
+        switch(setImagem){
+            case 1: imagemTxt.setImageDrawable(getResources().getDrawable(R.mipmap.anakin));
+                break;
+            case 2: imagemTxt.setImageDrawable(getResources().getDrawable(R.mipmap.darth));
+                break;
+            case 3: imagemTxt.setImageDrawable(getResources().getDrawable(R.mipmap.youngobiwan));
+                break;
+            case 4: imagemTxt.setImageDrawable(getResources().getDrawable(R.mipmap.oldobiwan));
+                break;
+        }
+    }
+
+
+}
